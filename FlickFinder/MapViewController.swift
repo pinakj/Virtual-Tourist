@@ -42,7 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        // mapView.delegate = self
-        self.navigationController?.navigationBar.isHidden = true
+       // self.navigationController?.navigationBar.isHidden = true
 
         
 
@@ -110,10 +110,6 @@ class MapViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDe
             newPin.latitude = newCoordinates.latitude as Double
             newPin.longitude = newCoordinates.longitude as Double
             //TO DO: Call the convenience method and call the pins latitude and longitude on the search
-            
-            FlickrClient.sharedInstance().latitude = newPin.latitude
-            FlickrClient.sharedInstance().longitude = newPin.longitude
-            try! self.sharedContext.save()
             FlickrClient.sharedInstance().getPhotosforCoordinates(pin:newPin){(success,error) in
                 if(success)
                 {
@@ -149,7 +145,11 @@ class MapViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDe
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("Pin Tapped")
         mapView.deselectAnnotation(view.annotation, animated: true)
-        // Fetch current pin data
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PhotoVC") as! PhotoCollectionViewController
+        vc.latitude = (view.annotation?.coordinate.latitude)! as Double
+        vc.longitude = (view.annotation?.coordinate.longitude)! as Double
+        
         let request = NSFetchRequest<Pin>(entityName: "Pin")
         
         do {
@@ -157,9 +157,9 @@ class MapViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDe
             
             for pin in pins {
                 
-                if pin.latitude == FlickrClient.sharedInstance().latitude && pin.longitude == FlickrClient.sharedInstance().longitude {
+                if pin.latitude == vc.latitude && pin.longitude == vc.longitude {
                     
-                    FlickrClient.sharedInstance().pinData = pin
+                    vc.pinData = pin
                     try! self.sharedContext.save()
 
 
@@ -169,7 +169,10 @@ class MapViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDe
             }
         }
         catch{}
-        self.performSegue(withIdentifier: "photoShow", sender: self)
+        self.navigationController!.pushViewController(vc, animated: true)
+
+        //self.present(vc, animated: true, completion: nil)
+        //self.performSegue(withIdentifier: "DoIt", sender: self)
 
     }
 

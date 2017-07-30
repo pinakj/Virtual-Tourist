@@ -12,11 +12,18 @@ import MapKit
 
 private let reuseIdentifier = "Cell"
 
+
+
+
 class PhotoCollectionViewController: UIViewController, MKMapViewDelegate, UICollectionViewDelegate  {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
+    
+    public var pinData : Pin?
+    public var latitude:Double = 0.0
+    public var longitude:Double = 0.0
 
     
     @IBOutlet var collectionView: UICollectionView?
@@ -42,8 +49,7 @@ class PhotoCollectionViewController: UIViewController, MKMapViewDelegate, UIColl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(FlickrClient.sharedInstance().pinData?.relationship?.count)
-
+        print(pinData?.relationship)
     }
 
     /*

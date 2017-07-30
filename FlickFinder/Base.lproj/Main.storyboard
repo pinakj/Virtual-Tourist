@@ -38,12 +38,12 @@
                     <navigationItem key="navigationItem" id="QaN-l5-4Mj"/>
                     <connections>
                         <outlet property="mapView" destination="2vG-fX-qeV" id="aoe-Cf-Odu"/>
-                        <segue destination="Rbx-w3-jZk" kind="show" identifier="photoShow" id="88a-DK-oS4"/>
+                        <segue destination="Rbx-w3-jZk" kind="presentation" identifier="DoIt" id="WdM-ju-6qM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="521" y="114"/>
+            <point key="canvasLocation" x="855" y="114"/>
         </scene>
         <!--Photo Collection View Controller-->
         <scene sceneID="pWs-Ym-owG">
@@ -121,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wh9-aB-9ce" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1376.8" y="113.79310344827587"/>
+            <point key="canvasLocation" x="1609" y="114"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GBC-Rw-tAd">
