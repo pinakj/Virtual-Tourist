@@ -82,6 +82,7 @@ class MapViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDe
         pins = getPinsfromCoreData()
         for pin in pins
         {
+            //print(pin.relationship?.count)
             let annotation = MKPointAnnotation()
             annotation.coordinate = pin.coordinate
             mapView.addAnnotation(annotation)
@@ -110,12 +111,6 @@ class MapViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDe
             newPin.latitude = newCoordinates.latitude as Double
             newPin.longitude = newCoordinates.longitude as Double
             //TO DO: Call the convenience method and call the pins latitude and longitude on the search
-            FlickrClient.sharedInstance().getPhotosforCoordinates(pin:newPin){(success,error) in
-                if(success)
-                {
-                    print("Success")
-                }
-            }
             pins.append(newPin)
             do
             {
@@ -160,10 +155,15 @@ class MapViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDe
                 if pin.latitude == vc.latitude && pin.longitude == vc.longitude {
                     
                     vc.pinData = pin
+                    FlickrClient.sharedInstance().pinData = pin
+                    FlickrClient.sharedInstance().getPhotosforCoordinates(pin:pin){(success,error) in
+                        if(success)
+                        {
+                            print("Success in retrieving data for pin!")
+                        }
+                    }
+
                     try! self.sharedContext.save()
-
-
-                    print("HERE")
                     break
                 }
             }

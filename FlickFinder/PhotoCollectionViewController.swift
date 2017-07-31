@@ -49,7 +49,7 @@ class PhotoCollectionViewController: UIViewController, MKMapViewDelegate, UIColl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(pinData?.relationship)
+        print(pinData?.relationship?.count)
     }
 
     /*

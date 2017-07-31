@@ -40,6 +40,7 @@ extension FlickrClient {
                     picture.photo = UIImagePNGRepresentation(downloadedPicture!) as NSData?
     
                     self.pinData?.addToRelationship(picture)
+                    print(self.pinData?.relationship?.count)
             
                     
                     try! self.sharedContext.save()
