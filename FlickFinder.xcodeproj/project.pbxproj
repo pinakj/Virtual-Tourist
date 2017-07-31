@@ -20,6 +20,7 @@
 		710DAB8E1F278A9700486E34 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 710DAB8B1F278A9700486E34 /* Model.xcdatamodeld */; };
 		7132045A1F26199500EFAB2F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF5E4C1F25E1B1000056EA /* MapViewController.swift */; };
 		7132045B1F26199500EFAB2F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF5E4C1F25E1B1000056EA /* MapViewController.swift */; };
+		71600E441F2FA08400019C72 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71600E431F2FA08400019C72 /* CustomCollectionViewCell.swift */; };
 		71DF5E1F1F25D900000056EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF5E1E1F25D900000056EA /* AppDelegate.swift */; };
 		71DF5E241F25D900000056EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71DF5E221F25D900000056EA /* Main.storyboard */; };
 		71DF5E261F25D900000056EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71DF5E251F25D900000056EA /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		710DAB891F2783B800486E34 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		710DAB8C1F278A9700486E34 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 		710DAB8D1F278A9700486E34 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		71600E431F2FA08400019C72 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		71DF5E1B1F25D900000056EA /* FlickFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71DF5E1E1F25D900000056EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71DF5E231F25D900000056EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				71DF5E2A1F25D900000056EA /* Info.plist */,
 				71DF5E271F25D900000056EA /* LaunchScreen.storyboard */,
 				710DAB821F27642C00486E34 /* CoreDataStackManager.swift */,
+				71600E431F2FA08400019C72 /* CustomCollectionViewCell.swift */,
 			);
 			name = Extras;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71DF5E1F1F25D900000056EA /* AppDelegate.swift in Sources */,
+				71600E441F2FA08400019C72 /* CustomCollectionViewCell.swift in Sources */,
 				710BB24A1F2B72C5008ED09D /* Photo+CoreDataProperties.swift in Sources */,
 				710BB2321F2A0B28008ED09D /* FlickrClient.swift in Sources */,
 				710BB2381F2B3ED6008ED09D /* PhotoCollectionViewController.swift in Sources */,

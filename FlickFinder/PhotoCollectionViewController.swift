@@ -15,15 +15,17 @@ private let reuseIdentifier = "Cell"
 
 
 
-class PhotoCollectionViewController: UIViewController, MKMapViewDelegate, UICollectionViewDelegate  {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
+class PhotoCollectionViewController: UIViewController,UICollectionViewDataSource,MKMapViewDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     public var pinData : Pin?
     public var latitude:Double = 0.0
     public var longitude:Double = 0.0
+    var columnNum:CGFloat = 2.0
+    let inset: CGFloat = 5.0
+    let spacing: CGFloat = 5.0
+    let lineSpacing: CGFloat = 5.0
+    var photosFromDisk = [UIImage]()
+    var photoCount:Int  = 0
 
     
     @IBOutlet var collectionView: UICollectionView?
@@ -32,24 +34,67 @@ class PhotoCollectionViewController: UIViewController, MKMapViewDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.delegate = self
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        collectionView?.dataSource = self
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        photoCount = (pinData?.relationship?.count)!
+        if photoCount > 0
+        {
+            let photos = pinData?.relationship?.allObjects
+            for photo in photos!
+            {
+                let image = UIImage(data: ((photo as! Photo).photo as! NSData) as Data)
+                photosFromDisk.append(image!)
+            }
+            
+        }
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(pinData?.relationship?.count)
+        collectionView?.reloadData()
+    }
+}
+extension PhotoCollectionViewController
+{
+
+     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("This called")
+        return photosFromDisk.count
+    }
+    
+     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! CustomCollectionViewCell
+        
+        cell.imageView?.image = self.photosFromDisk[indexPath.row]
+        print("Called")
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        print("Resizing")
+        let width = Int((collectionView.frame.width / columnNum) - (inset + spacing))
+        
+        return CGSize(width: width, height: width)
+    }
+    
+    //top, bottom, left and right margin spacing
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+    }
+    
+    //spacing between lines(items)
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return spacing
+    }
+    
+    //Spacing between each line(successive row)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return lineSpacing
+    }
+    
     }
 
     /*
@@ -94,4 +139,4 @@ class PhotoCollectionViewController: UIViewController, MKMapViewDelegate, UIColl
     }
     */
 
-}
+

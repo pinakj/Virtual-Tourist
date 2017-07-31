@@ -171,9 +171,6 @@ class MapViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDe
         catch{}
         self.navigationController!.pushViewController(vc, animated: true)
 
-        //self.present(vc, animated: true, completion: nil)
-        //self.performSegue(withIdentifier: "DoIt", sender: self)
-
     }
 
     
