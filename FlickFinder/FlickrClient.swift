@@ -24,6 +24,7 @@ class FlickrClient:NSObject, NSFetchedResultsControllerDelegate
     public var pinData : Pin?
     public var latitude:Double?
     public var longitude:Double?
+    var cnt:Int = 0
     
     
     override init() {

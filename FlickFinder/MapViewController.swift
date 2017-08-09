@@ -40,11 +40,7 @@ class MapViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDe
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-       // mapView.delegate = self
-       // self.navigationController?.navigationBar.isHidden = true
-
-        
+        super.viewWillAppear(animated)        
 
     }
     

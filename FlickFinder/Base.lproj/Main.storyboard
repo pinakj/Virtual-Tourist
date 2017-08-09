@@ -64,7 +64,7 @@
                                 </constraints>
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fut-GE-Usl">
-                                <rect key="frame" x="0.0" y="153" width="375" height="514"/>
+                                <rect key="frame" x="0.0" y="153" width="375" height="468"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wa7-Eb-inT">
                                     <size key="itemSize" width="118" height="110"/>
@@ -82,16 +82,25 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DTV-HL-LTr">
                                                     <rect key="frame" x="0.0" y="0.0" width="118" height="110"/>
+                                                    <color key="backgroundColor" red="0.88862230330000003" green="0.88862230330000003" blue="0.88862230330000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BmE-kT-xeV">
+                                                    <rect key="frame" x="49" y="45" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="DTV-HL-LTr" secondAttribute="bottom" id="4Rz-cJ-sPW"/>
+                                            <constraint firstItem="BmE-kT-xeV" firstAttribute="leading" secondItem="a0J-zT-0vV" secondAttribute="leadingMargin" constant="41" id="F8l-Mf-aia"/>
+                                            <constraint firstItem="BmE-kT-xeV" firstAttribute="centerY" secondItem="a0J-zT-0vV" secondAttribute="centerY" id="H53-rr-s3o"/>
                                             <constraint firstItem="DTV-HL-LTr" firstAttribute="top" secondItem="a0J-zT-0vV" secondAttribute="top" id="T5P-Yy-JHv"/>
                                             <constraint firstAttribute="trailing" secondItem="DTV-HL-LTr" secondAttribute="trailing" id="TrZ-1F-LqQ"/>
                                             <constraint firstItem="DTV-HL-LTr" firstAttribute="leading" secondItem="a0J-zT-0vV" secondAttribute="leading" id="Vyx-fk-fox"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="BmE-kT-xeV" secondAttribute="bottom" constant="37" id="adx-PX-hAp"/>
+                                            <constraint firstItem="BmE-kT-xeV" firstAttribute="centerX" secondItem="a0J-zT-0vV" secondAttribute="centerX" id="hgT-wo-BTQ"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="BmE-kT-xeV" id="Yt5-xb-v4z"/>
                                             <outlet property="imageView" destination="DTV-HL-LTr" id="fGb-Gd-iHf"/>
                                         </connections>
                                     </collectionViewCell>
@@ -107,7 +116,7 @@
                             <constraint firstItem="UlG-pg-zRk" firstAttribute="trailing" secondItem="gCs-G3-chn" secondAttribute="trailing" id="7xH-BL-Oad"/>
                             <constraint firstItem="fut-GE-Usl" firstAttribute="top" secondItem="UP3-kj-Ha6" secondAttribute="bottom" constant="133" id="EmV-RI-Z2V"/>
                             <constraint firstItem="fut-GE-Usl" firstAttribute="leading" secondItem="A8i-RO-J0x" secondAttribute="leading" id="FL6-fg-gkF"/>
-                            <constraint firstItem="fut-GE-Usl" firstAttribute="bottom" secondItem="KC6-4y-Bto" secondAttribute="top" id="FgD-O0-CNO"/>
+                            <constraint firstItem="fut-GE-Usl" firstAttribute="bottom" secondItem="KC6-4y-Bto" secondAttribute="top" constant="-46" id="FgD-O0-CNO"/>
                             <constraint firstAttribute="trailing" secondItem="fut-GE-Usl" secondAttribute="trailing" id="IMP-Ts-fN4"/>
                             <constraint firstItem="gCs-G3-chn" firstAttribute="leading" secondItem="fut-GE-Usl" secondAttribute="leading" id="LoE-3r-blf"/>
                             <constraint firstItem="UlG-pg-zRk" firstAttribute="leading" secondItem="gCs-G3-chn" secondAttribute="leading" id="QwG-X1-bCr"/>
@@ -120,11 +129,12 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="fut-GE-Usl" id="Smn-PH-NKk"/>
+                        <outlet property="mapView" destination="gCs-G3-chn" id="TPD-PU-slU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wh9-aB-9ce" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1609" y="114"/>
+            <point key="canvasLocation" x="1608.8" y="113.79310344827587"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GBC-Rw-tAd">

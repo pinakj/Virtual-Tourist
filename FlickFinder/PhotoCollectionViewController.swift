@@ -17,6 +17,9 @@ private let reuseIdentifier = "Cell"
 
 class PhotoCollectionViewController: UIViewController,UICollectionViewDataSource,MKMapViewDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    
+    @IBOutlet var mapView:MKMapView!
+    
     public var pinData : Pin?
     public var latitude:Double = 0.0
     public var longitude:Double = 0.0
@@ -35,38 +38,56 @@ class PhotoCollectionViewController: UIViewController,UICollectionViewDataSource
         super.viewDidLoad()
         collectionView?.delegate = self
         collectionView?.dataSource = self
+        
+        
+        mapView.isUserInteractionEnabled = false
+        
+        // Add map pin annotation
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: (pinData?.latitude)!, longitude: (pinData?.longitude)!)
+        self.mapView.addAnnotation(annotation)
+        
+        let center = annotation.coordinate
+        let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+        let region = MKCoordinateRegion(center: center, span: span)
+        
+        mapView.setRegion(region, animated: true)
+        mapView.regionThatFits(region)
 
-        // Register cell classes
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         photoCount = (pinData?.relationship?.count)!
         if photoCount > 0
         {
             let photos = pinData?.relationship?.allObjects
             for photo in photos!
             {
-                let image = UIImage(data: ((photo as! Photo).photo as! NSData) as Data)
+                let image = UIImage(data: ((photo as! Photo).photo!) as Data)
                 photosFromDisk.append(image!)
             }
             
         }
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        collectionView?.reloadData()
     }
 }
 extension PhotoCollectionViewController
 {
 
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("This called")
+        print(photosFromDisk.count)
         return photosFromDisk.count
     }
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! CustomCollectionViewCell
+        cell.activityIndicator.startAnimating()
         
-        cell.imageView?.image = self.photosFromDisk[indexPath.row]
+        DispatchQueue.main.async {
+            cell.imageView?.image = self.photosFromDisk[indexPath.row]
+
+        }
+        cell.activityIndicator.stopAnimating()
         print("Called")
         
         return cell
@@ -95,48 +116,5 @@ extension PhotoCollectionViewController
         return lineSpacing
     }
     
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
+}
 

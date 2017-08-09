@@ -13,8 +13,7 @@ extension FlickrClient {
     
     public func getPhotosforCoordinates(pin: Pin, completionhandlerForPhoto: @escaping(_ success: Bool, _ errorString:String?)
         -> Void) {
-        
-        
+                
         
         let parameters: [String : AnyObject] = [
             FlickrClient.Constants.Keys.APIKey: FlickrClient.Constants.Values.APIKey as AnyObject, FlickrClient.Constants.Keys.Format:FlickrClient.Constants.Values.Response as AnyObject,FlickrClient.Constants.Keys.Method:FlickrClient.Constants.Values.SearchMethod as AnyObject, FlickrClient.Constants.Keys.Latitude:pin.latitude as AnyObject, FlickrClient.Constants.Keys.Longitude:pin.longitude as AnyObject, "page":"1" as AnyObject, "nojsoncallback":"1" as AnyObject, "extras":"url_m" as AnyObject, "per_page":"21" as AnyObject]
@@ -24,11 +23,18 @@ extension FlickrClient {
             
             if(error == nil)
             {
+                
                 let photoDictionary = result?["photos"] as! [String:AnyObject]
                 let photosArray = photoDictionary["photo"] as! [[String:AnyObject]]
                 
                 for photo in photosArray
                 {
+                    self.cnt = self.cnt + 1
+
+                    
+                    //TO DO: REDO THIS
+                    if(self.cnt < 17)
+                    {
                     let photoURL = photo["url_m"] as! String
                    
                     
@@ -45,26 +51,10 @@ extension FlickrClient {
                     
                     try! self.sharedContext.save()
                     print(self.sharedContext)
+                    completionhandlerForPhoto(true,nil)
+                    }
                 }
                 
-/*
- mapView.isUserInteractionEnabled = false
- createNewCollectionButton.isEnabled = false // Disable by default
- 
- // Add map pin annotation
- let annotation = MKPointAnnotation()
- annotation.coordinate = CLLocationCoordinate2D(latitude: (pinData?.latitude)!, longitude: (pinData?.longitude)!)
- self.mapView.addAnnotation(annotSation)
- 
- let center = annotation.coordinate
- let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
- let region = MKCoordinateRegion(center: center, span: span)
- 
- mapView.setRegion(region, animated: true)
- mapView.regionThatFits(region)
- */
- 
-
             }
             else
             {
